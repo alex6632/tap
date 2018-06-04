@@ -6,9 +6,11 @@ const port = process.env.PORT;
 const path = require('path');
 const bodyParser = require('body-parser');
 const router = express.Router();
+const passport = require('passport');
 
 /* Define db */
 const db = require('./src/services/db');
+const auth = require('./src/services/auth');
 
 /* Define routes */
 let home = require('./src/user/routes');
@@ -28,6 +30,8 @@ const init = () => {
   app.unsubscribe(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   
+  app.use(passport.initialize());
+
   // ROUTES
   app.use('/', home);
   app.use('/me', game);
