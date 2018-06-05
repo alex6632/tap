@@ -1,10 +1,13 @@
 const { Router } = require('express');
 const router = Router({ mergeParams: true });
-
-router.get('/', (req, res) => {
-  res.json({
-    res: '/tap ok'
-  }).status(200);
+const jwt = require('express-jwt');
+const auth = jwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: 'payload',
 });
+const access  = require('../services/utils');
+
+/* /tap -> score route */
+router.get('/', auth, access.hasAccess);
 
 module.exports = router;

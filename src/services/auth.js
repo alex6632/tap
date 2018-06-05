@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const User = require('../user/model');
 
-const auth = () => {
+const authentication = () => {
   passport.use(new LocalStrategy(
     {
       usernameField: 'email'
@@ -13,7 +13,7 @@ const auth = () => {
         if (err) {
           return done(err, false);
         }
-        if (!user.validPassword(password)) {
+        if (!user.checkPassword(password)) {
           return done(null, false);
         }
         return done(null, user);
@@ -22,4 +22,6 @@ const auth = () => {
   ));
 }
 
-module.exports = { auth };
+module.exports = { 
+  authentication,
+};

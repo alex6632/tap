@@ -21,8 +21,8 @@ const UserSchema = new Schema({
 });
 
 UserSchema.methods.setPassword = (password) => {
-  return new Promise((reject, resolve) => {
-    // Generate Salt
+  // Generate Salt
+  return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err, salt) => {
       if (err) {
         return reject({ err, data: null });
@@ -31,19 +31,20 @@ UserSchema.methods.setPassword = (password) => {
         if (err) {
           return reject({ err, data: null });
         }
-        return resolve({ err: null, data: hash });
+        return resolve({ data: hash });
       });
     });
   });
 }
 
 UserSchema.methods.checkPassword = (password) => {
-  return new Promise((reject, resolve) => {
+  return new Promise((resolve, reject) => {
+    console.log('hash',this.hash)
     bcrypt.compare(password, this.hash, (err, data) => {
-      if (err) {
-        return reject({ err, data: null });
+      if (err || data === false) {
+        return reject({ data: null, err });
       }
-      return resolve({ err: null, data })
+      return resolve({ data, err: null });
     });
   });
 }

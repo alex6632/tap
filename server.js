@@ -22,20 +22,32 @@ const init = () => {
 
   // DB
   db.initDatabase();
+
+  // AUTHENTICATION
+  auth.authentication();
   
   // FRONT
-  app.use(express.static(path.join(__dirname, 'www')));
+  //app.use(express.static(path.join(__dirname, 'www')));
 
   // BODY PARSER
-  app.unsubscribe(bodyParser.json());
+  app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   
+  // PASSPORT INITIALISATION
   app.use(passport.initialize());
 
   // ROUTES
   app.use('/', home);
   app.use('/me', game);
   app.use('/tap', scores);
+
+  // CATCH UNAUTHORIZED ERRORS
+  app.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401);
+      res.json({"message" : err.name + ": " + err.message});
+    }
+  });
   
   // LISTEN
   app.listen(port, () => console.log(`Server watch on port -> ${port}`));
