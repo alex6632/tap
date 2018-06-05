@@ -25,9 +25,6 @@ const init = () => {
 
   // AUTHENTICATION
   auth.authentication();
-  
-  // FRONT
-  //app.use(express.static(path.join(__dirname, 'www')));
 
   // BODY PARSER
   app.use(bodyParser.json());
