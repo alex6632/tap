@@ -34,9 +34,9 @@ const init = () => {
   app.use(passport.initialize());
 
   // ROUTES
-  app.use('/', home);
-  app.use('/me', game);
-  app.use('/tap', scores);
+  app.use('/api', home);
+  app.use('/api', game);
+  app.use('/api', scores);
 
   // CATCH UNAUTHORIZED ERRORS
   app.use((err, req, res, next) => {

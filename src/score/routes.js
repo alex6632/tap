@@ -8,6 +8,6 @@ const auth = jwt({
 const access  = require('../services/utils');
 
 /* /tap -> score route */
-router.get('/', auth, access.hasAccess);
+router.get('/tap', auth, access.hasAccess);
 
 module.exports = router;

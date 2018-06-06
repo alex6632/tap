@@ -8,6 +8,6 @@ const auth = jwt({
 const access  = require('../services/utils');
 
 /* /me -> game route */
-router.get('/', auth, access.hasAccess);
+router.get('/me', auth, access.hasAccess);
 
 module.exports = router;

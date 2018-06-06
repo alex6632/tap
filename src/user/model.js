@@ -20,7 +20,7 @@ const UserSchema = new Schema({
   hash: String,
 });
 
-UserSchema.methods.setPassword = (password) => {
+UserSchema.methods.setPassword = function (password) {
   // Generate Salt
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err, salt) => {
@@ -37,7 +37,7 @@ UserSchema.methods.setPassword = (password) => {
   });
 }
 
-UserSchema.methods.checkPassword = (password) => {
+UserSchema.methods.checkPassword = function (password) {
   return new Promise((resolve, reject) => {
     console.log('hash',this.hash)
     bcrypt.compare(password, this.hash, (err, data) => {
@@ -49,7 +49,7 @@ UserSchema.methods.checkPassword = (password) => {
   });
 }
 
-UserSchema.methods.generateJwt = () => {
+UserSchema.methods.generateJwt = function () {
   let expiry = new Date();
   expiry.setDate(expiry.getDate() + 7);
 
