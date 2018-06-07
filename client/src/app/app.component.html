@@ -2,7 +2,7 @@
   <h1 *ngIf="!auth.isLoggedIn()">Welcome on
     <span>tapboard</span>
   </h1>
-  <h1 *ngIf="auth.isLoggedIn()">Hello {{ auth.getUserDetails()?.FirstName }}</h1>
+  <h1 *ngIf="auth.isLoggedIn()">Hello {{ auth.getUserDetails()?.firstName }}</h1>
   <div class="info">Login or register to start tapping</div>
 
 

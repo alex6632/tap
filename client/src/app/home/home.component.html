@@ -1,1 +1,5 @@
-<h1>Home</h1>
+<h2 (click)="toggleShowLogin()">Login</h2>
+<login-form *ngIf="showLogin"></login-form>
+
+<h2 (click)="toggleShowRegister()">Register</h2>
+<register-form *ngIf="showRegister"></register-form>
