@@ -10,6 +10,7 @@ const authentication = () => {
     },
     (username, password, done) => {
       User.findOne({email: username}, (err, user) => {
+        console.log(user)
         if (err) {
           return done(err, false);
         }

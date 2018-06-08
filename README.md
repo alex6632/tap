@@ -34,5 +34,5 @@ sudo mongod
 
 3/ Run angular
 ```
-ng serve
+ng serve --proxy-config proxy-conf.json
 ```
