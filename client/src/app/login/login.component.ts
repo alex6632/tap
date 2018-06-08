@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
+  isEmptyRegex = /^\s*$/
   credentials: TokenPayload = {
     email: '',
     password: ''
@@ -23,29 +24,12 @@ export class LoginComponent {
 
     let error = false;
 
-    /*this.errors = {
-      email: '',
-      password: '',
-      credentials: ''
-    };*/
-
-    console.log('email',this.credentials.email)
-    console.log('password',this.credentials.password)
-
-    if (this.credentials.email === '' || this.credentials.password === '') {
-      error = true;
-      console.log('error')
-    }
-    if (this.credentials.email === '') {
-      this.errors.email = "Email is needed";
-    }
-    if (this.credentials.password === '') {
-      this.errors.password = 'Password is needed';
-    }
-    
+    error = this.isEmptyRegex.test(this.credentials.email)
+    if(error) this.errors.email = "Email is needed";
+    error = this.isEmptyRegex.test(this.credentials.password) ? true: error
+    if( this.isEmptyRegex.test(this.credentials.password)) this.errors.password = 'Password is needed';
     
     if (!error) {
-      console.log('cocou')
       this.auth.login (this.credentials).subscribe(() => {
         this.router.navigateByUrl('/me');
       }, (err) => {
@@ -53,5 +37,9 @@ export class LoginComponent {
         this.errors.credentials = 'Unknown user';
       });
     }
+  }
+
+  CheckField(field, value) {
+    if(!this.isEmptyRegex.test(value)) this.errors[field] = ""
   }
 }

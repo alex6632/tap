@@ -4,15 +4,17 @@
       Email
       <span *ngIf="errors.email !== ''">{{errors.email}}</span>
     </label>
-    <input type="email" class="form-control" name="email" [(ngModel)]="credentials.email">
+    <input type="email" class="form-control" name="email" [(ngModel)]="credentials.email" (keyup)="CheckField('email', $event.target.value)" >
   </div>
   <div class="form-group">
     <label for="password">
       Password
       <span *ngIf="errors.password !== ''">{{errors.password}}</span>
     </label>
-    <input type="password" class="form-control" name="password" [(ngModel)]="credentials.password">
+    <input type="password" class="form-control" name="password" [(ngModel)]="credentials.password"  (keyup)="CheckField('password', $event.target.value)" >
   </div>
+  
   <div class="error" *ngIf="errors.credentials">{{errors.credentials}}</div>
+
   <button type="submit" class="btn btn-default">Login</button>
 </form>

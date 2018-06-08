@@ -5,7 +5,7 @@ Requirements
 ------------
 * mongodb
 * node.js v8.9 or later
-* angular-cli v5.0.0 or later
+* angular v^5.0.0
 
 Install
 -------

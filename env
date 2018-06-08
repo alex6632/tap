@@ -1,0 +1,5 @@
+PORT=5555
+API='http://localhost:5555/'
+MONGO_URL='mongodb://localhost:27017/tap'
+
+JWT_SECRET='df5yet0dcspus6ee4ppi9neji5x7botut5ydo4h6ncql8a52pk'

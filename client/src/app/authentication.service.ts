@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable'
-import { map } from 'rxjs/operators/map';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 export interface UserDetails {
@@ -22,13 +22,17 @@ export interface TokenPayload {
   lastName?: string;
   email: string;
   password: string;
+  cgu?: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationService {
+
   private token: string;
 
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   private saveToken(token: string): void {
     localStorage.setItem('mean-token', token);
@@ -73,16 +77,19 @@ export class AuthenticationService {
 
     if (method === 'post') {
       console.log('USER ->',user)
-      //base = this.http.post(`/api/${type}`, user);
+      base = this.http.post(`/api/${type}`, user);
     } else {
-      const headers = new Headers({
+      /*const headers = new Headers({
         'Authorization': `Bearer ${this.getToken()}`
-      });
+      });*/
       //base = this.http.get(`/api/${type}`, { headers: headers });
+      base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
-    return;
+    //return;
 
-    /*const request = base.pipe(
+    /* Delete return below after debug */
+
+    const request = base.pipe(
       map((data: TokenResponse) => {
         if (data.token) {
           this.saveToken(data.token);
@@ -90,7 +97,7 @@ export class AuthenticationService {
         return data;
       })
     );
-    return request;*/
+    return request;
   }
 
   public register(user: TokenPayload):Observable<any> {
@@ -98,8 +105,6 @@ export class AuthenticationService {
   }
 
   public login(user: TokenPayload):Observable<any> {
-    console.log('login...')
-    console.log('user->',user);
     return this.request('post', 'login', user)
   }
 
@@ -116,5 +121,7 @@ export class AuthenticationService {
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
   }
+
+
 
 }
