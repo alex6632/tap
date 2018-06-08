@@ -21,7 +21,7 @@ export class LoginComponent {
 
   login() {
 
-    let error = true;
+    let error = false;
 
     /*this.errors = {
       email: '',
@@ -50,7 +50,7 @@ export class LoginComponent {
         this.router.navigateByUrl('/me');
       }, (err) => {
         console.error(err);
-        // this.errors.credentials = 'Unknown user';
+        this.errors.credentials = 'Unknown user';
       });
     }
   }
