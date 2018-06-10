@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+  --time: 10s;
+}
+
 .container {
   width: 400px;
   margin: auto;
@@ -128,6 +132,15 @@ label.cgu {
   border-radius: 5px;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.btn--small {
+  padding: 5px;
+}
+
+.inline-b {
+  display: inline-block;
 }
 
 .error {
@@ -136,4 +149,81 @@ label.cgu {
   font-size: 11px;
   font-weight: 700;
   margin: 10px 0;
+}
+
+.navbar {
+
+}
+
+.navbar__item {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.game img {
+  display: block;
+  max-width: 300px;
+  margin: 50px auto;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(207, 207, 207);
+}
+
+.progress-bar .inner {
+  position: relative;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  top: 5px; left: 5px;
+  max-width: 0%;
+  background-color: rgb(122, 35, 122);
+  transition: max-width var(--time) ease-in-out;
+}
+
+#progress.start {
+  max-width: 100%;
+  transition: max-width var(--time) ease-in-out;
+}
+
+/* 
+ * SCORES
+ */
+
+.scores-list {
+
+}
+
+.scores-list .scores-list__item {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.scores-list .scores-list__item .score {
+  font-weight: 700;
+  color: rgb(129, 129, 129);
+  font-size: 20px
+}
+
+.scores-list .scores-list__item .details {
+  font-size: 13px;
+  color: rgb(153, 153, 153);
+}
+
+/* 
+ * FOOTER
+ */
+footer {
+  margin-top: 120px;
+  text-transform: uppercase;
+  text-align: center;
+  border-top: solid 1px rgb(182, 182, 182);
+  border-bottom: solid 1px rgb(182, 182, 182);
+  padding: 15px 0;
+  color:  rgb(182, 182, 182);
+  font-size: 12px;
 }

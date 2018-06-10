@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { AuthenticationService, TokenPayload } from '../services/authentication.service';
+import { ValidationService } from '../services/validation.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  isEmptyRegex = /^\s*$/
+
   credentials: TokenPayload = {
     email: '',
     password: ''
@@ -18,16 +19,19 @@ export class LoginComponent {
     credentials: '',
   }
 
-  constructor(private auth: AuthenticationService, private router: Router) { }
+  constructor(private auth: AuthenticationService, private validation: ValidationService, private router: Router) { }
 
   login() {
 
     let error = false;
+    let errorType = '';
 
-    error = this.isEmptyRegex.test(this.credentials.email)
-    if(error) this.errors.email = "Email is needed";
-    error = this.isEmptyRegex.test(this.credentials.password) ? true: error
-    if( this.isEmptyRegex.test(this.credentials.password)) this.errors.password = 'Password is needed';
+    errorType = this.validation.isEmail(this.credentials.email);
+    if (errorType === 'empty') this.errors.email = "Email is needed";
+    if (errorType === 'format') this.errors.email = "Email format is incorrect";
+
+    error = this.validation.isEmpty(this.credentials.password) ? true: error
+    if( this.validation.isEmpty(this.credentials.password)) this.errors.password = 'Password is needed';
     
     if (!error) {
       this.auth.login (this.credentials).subscribe(() => {
@@ -40,6 +44,12 @@ export class LoginComponent {
   }
 
   CheckField(field, value) {
-    if(!this.isEmptyRegex.test(value)) this.errors[field] = ""
+    if (field === 'email') {
+      if (this.validation.isEmail(value) !== 'empty' || this.validation.isEmail(value) !== 'format') {
+        this.errors.email = "";
+      }
+    } else {
+      if(!this.validation.isEmpty(value)) this.errors[field] = "";
+    }
   }
 }

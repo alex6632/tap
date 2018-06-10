@@ -1,3 +1,19 @@
+<header>
+    <h1 *ngIf="!auth.isLoggedIn()">Welcome on
+      <span>tapboard</span>
+    </h1>
+    <div class="info" *ngIf="!auth.isLoggedIn()">Login or register to start tapping</div>
+
+    <ul class="navbar">
+      <li class="navbar__item" *ngIf="auth.isLoggedIn()">
+        <a class="btn btn--small" routerLink="/tap">Scores</a>
+      </li>
+      <li class="navbar__item" *ngIf="auth.isLoggedIn()">
+        <a class="btn btn--small" (click)="auth.logout()">Logout</a>
+      </li>
+    </ul>
+  </header>
+
 <h2 (click)="toggleShowLogin()">Login</h2>
 <login-form *ngIf="showLogin"></login-form>
 

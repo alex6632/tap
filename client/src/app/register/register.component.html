@@ -5,14 +5,14 @@
       First name
       <span *ngIf="errors.firstName !== ''">{{errors.firstName}}</span>
     </label>
-    <input type="text" class="form-control" name="firstName" [(ngModel)]="credentials.firstName">
+    <input type="text" class="form-control" name="firstName" [(ngModel)]="credentials.firstName" (keyup)="CheckField('firstName', $event.target.value)">
   </div>
   <div class="form-group">
     <label for="name">
       Last name
       <span *ngIf="errors.lastName !== ''">{{errors.lastName}}</span>
     </label>
-    <input type="text" class="form-control" name="lastName" [(ngModel)]="credentials.lastName">
+    <input type="text" class="form-control" name="lastName" [(ngModel)]="credentials.lastName" (keyup)="CheckField('lastName', $event.target.value)">
   </div>
 
   <h3>Login informations</h3>
@@ -21,18 +21,18 @@
       Email
       <span *ngIf="errors.email !== ''">{{errors.email}}</span>
     </label>
-    <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+    <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email" (keyup)="CheckField('email', $event.target.value)">
   </div>
   <div class="form-group">
     <label for="password">
       Password
       <span *ngIf="errors.password !== ''">{{errors.password}}</span>
     </label>
-    <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+    <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password" (keyup)="CheckField('password', $event.target.value)">
   </div>
 
   <div class="form-group mg">
-    <input type="checkbox" class="input-cgu" name="cgu" placeholder="Password" [(ngModel)]="credentials.cgu">
+    <input type="checkbox" class="input-cgu" name="cgu" placeholder="Password" [(ngModel)]="credentials.cgu" (click)="CheckField('cgu', $event.target.value)">
     <label for="cgu" class="cgu">I accept the terms and conditions</label>
   </div>
 

@@ -1,23 +1,11 @@
 <div class="container">
-  <header>
-    <h1 *ngIf="!auth.isLoggedIn()">Welcome on
-      <span>tapboard</span>
-    </h1>
-    <h1 *ngIf="auth.isLoggedIn()">Hello {{ auth.getUserDetails()?.firstName }}</h1>
-    <div class="info">Login or register to start tapping</div>
-
-
-    <ul class="navbar">
-      <li *ngIf="auth.isLoggedIn()">
-        <a routerLink="/tap">Scores</a>
-      </li>
-      <li *ngIf="auth.isLoggedIn()">
-        <a (click)="auth.logout()">Logout</a>
-      </li>
-    </ul>
-  </header>
 
   <router-outlet></router-outlet>
 
+  <footer>
+    <p>
+      Under MIT Licence @2018 - Alexandre Simonin
+    </p>
+  </footer>
 
 </div>

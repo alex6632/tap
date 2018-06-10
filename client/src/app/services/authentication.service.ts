@@ -39,14 +39,14 @@ export class AuthenticationService {
     this.token = token;
   }
 
-  private getToken(): string {
+  public getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem('mean-token');
     }
     return this.token;
   }
 
-  private getUserDetails(): UserDetails {
+  public getUserDetails(): UserDetails {
     const token = this.getToken();
     let payload;
     if (token) {
@@ -71,12 +71,7 @@ export class AuthenticationService {
   private request(method: 'post' | 'get', type: 'login' | 'register' | 'me' | 'tap', user?: TokenPayload): Observable<any> {
     let base;
 
-    console.log('METHOD ->',method)
-    console.log('TYPE ->',type)
-    console.log('USER ->',user)
-
     if (method === 'post') {
-      console.log('USER ->',user)
       base = this.http.post(`/api/${type}`, user);
     } else {
       /*const headers = new Headers({
@@ -85,9 +80,6 @@ export class AuthenticationService {
       //base = this.http.get(`/api/${type}`, { headers: headers });
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
-    //return;
-
-    /* Delete return below after debug */
 
     const request = base.pipe(
       map((data: TokenResponse) => {

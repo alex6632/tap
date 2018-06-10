@@ -1,0 +1,20 @@
+<header>
+  <h1 *ngIf="auth.isLoggedIn()">Score table</h1>
+  <div class="info" *ngIf="auth.isLoggedIn()">Here is the list of scores</div>
+
+  <ul class="navbar">
+    <li class="navbar__item" *ngIf="auth.isLoggedIn()">
+      <a class="btn btn--small" routerLink="/me">Play</a>
+    </li>
+    <li class="navbar__item" *ngIf="auth.isLoggedIn()">
+      <a class="btn btn--small" (click)="auth.logout()">Logout</a>
+    </li>
+  </ul>
+</header>
+
+<ul class="scores-list">
+  <li class="scores-list__item" *ngFor="let score of scores">
+    <div class="score">{{score.score}}pts</div>
+    <div class="details">{{score.userId.firstName}} {{score.userId.lastName}} / {{ score.date | date :'dd/MM/yyyy hh:mm:ss' }}</div>
+  </li>
+</ul>
