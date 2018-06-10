@@ -11,7 +11,7 @@ const authentication = () => {
     (username, password, done) => {
       User.findOne({email: username}, (err, user) => {
         console.log(user)
-        if (err) {
+        if (err || !user) {
           return done(err, false);
         }
         if (!user.checkPassword(password)) {
