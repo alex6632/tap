@@ -5,7 +5,7 @@ Requirements
 ------------
 * mongodb
 * node.js v8.9 or later
-* angular v^5.0.0
+* angular v^6.0.0 or later
 
 Install
 -------
@@ -17,22 +17,22 @@ npm install
 Run
 -------
 
-1/ Run node server
-```
-npm run start
-```
-or just
-```
-nodemon
-```
-
-2/ Run mongodb (on OSX)
+1/ Run mongodb (on OSX)
 ```
 mongod
 ```
 If you have access problem,
 ```
 sudo mongod
+```
+
+2/ Run node server
+```
+npm run start
+```
+or just
+```
+nodemon
 ```
 
 2 bis/ On windows, run (update path if necessary)
@@ -44,5 +44,5 @@ sudo mongod
 ```
 cd client
 npm install
-ng serve --proxy-config proxy-conf.json
+npm run start
 ```
