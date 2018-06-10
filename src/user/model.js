@@ -20,6 +20,7 @@ const UserSchema = new Schema({
   hash: String,
 });
 
+
 UserSchema.methods.setPassword = function (password) {
   // Generate Salt
   return new Promise((resolve, reject) => {

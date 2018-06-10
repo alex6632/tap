@@ -7,14 +7,6 @@ const auth = jwt({
 });
 const userController = require('./controller');
 
-/* /me -> game route */
-router.get('/', (req, res) => {
-  res.json({
-    'home': 'ok',
-  })
-});
-
-/* Auth routes */
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 

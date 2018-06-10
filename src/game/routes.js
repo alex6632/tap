@@ -5,9 +5,9 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   userProperty: 'payload',
 });
-const access  = require('../services/utils');
+//const access  = require('../services/utils');
+const gameController = require('./controller');
 
-/* /me -> game route */
-router.get('/me', auth, access.hasAccess);
+router.get('/new-tap', auth, gameController.game);
 
 module.exports = router;

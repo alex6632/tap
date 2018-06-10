@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const User = require('./model');
+const hasAccess = require('../services/utils');
 
 // REGISTER
 const register = async (req, res) => {
@@ -93,6 +94,17 @@ const login = (req, res) => {
       res.status(401).json(info);
     }
   })(req, res);
+}
+
+const me = (req, res) => {
+
+  if(hasAccess) {
+    User
+    .findById(req.payload._id)
+    .exec(function(err, user) {
+      res.status(200).json(user);
+    });
+  }
 }
 
 module.exports = {

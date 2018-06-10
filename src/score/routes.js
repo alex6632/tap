@@ -5,9 +5,9 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   userProperty: 'payload',
 });
-const access  = require('../services/utils');
+const scoreController = require('./controller');
 
-/* /tap -> score route */
-router.get('/tap', auth, access.hasAccess);
+router.get('/scores', auth, scoreController.scores);
+router.post('/score', auth, scoreController.add);
 
 module.exports = router;
